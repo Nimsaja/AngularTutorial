@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class HeroService {
   
-  private heroesUrl = 'api/heroes'; // URL to web api
+  private heroesUrl = 'https://goheros-207118.appspot.com/api/heroes'; // URL to web api
 
   constructor(
     private http: HttpClient,
