@@ -16,7 +16,7 @@ const httpOptions = {
 })
 export class HeroService {
   
-  private heroesUrl = 'https://goheros-207118.appspot.com/api/heroes'; // URL to web api
+  private heroesUrl = 'http://localhost:8081/api/heroes'; // URL to web api
 
   constructor(
     private http: HttpClient,
@@ -75,9 +75,10 @@ export class HeroService {
       // if not search term, return empty hero array.
       return of ([]);
     }
+    
     return this.http.get<Hero[]>(`${this.heroesUrl}/?name=${term}`).pipe(
       tap(_ => this.log(`found heroes matching "${term}"`)),
-      catchError(this.handleError<Hero[]>('searchHeroes', []))
+      catchError(this.handleError<Hero[]>('searchHeroes '+`${this.heroesUrl}/?name=${term}`, []))
     );
   }
   
