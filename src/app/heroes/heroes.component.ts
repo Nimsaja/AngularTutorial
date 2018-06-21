@@ -23,6 +23,8 @@ export class HeroesComponent implements OnInit {
   }
   
   add(name: string): void {
+    console.log("add Hero")
+    
     name = name.trim();
     if (!name) { return; }
     this.heroService.addHero({ name } as Hero)  //handler creates a Hero-like object from the name
@@ -33,7 +35,9 @@ export class HeroesComponent implements OnInit {
   
   delete(hero: Hero): void {
     this.heroes = this.heroes.filter(h => h !== hero);
-    this.heroService.deleteHero(hero).subscribe();
+    this.heroService.deleteHero(hero)
+      .subscribe(_ => this.getHeroes());
+    
   }
 
 }
