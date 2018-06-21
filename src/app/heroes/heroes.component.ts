@@ -23,6 +23,8 @@ export class HeroesComponent implements OnInit {
   }
   
   add(name: string): void {
+    console.log("add Hero")
+    
     name = name.trim();
     if (!name) { return; }
     this.heroService.addHero({ name } as Hero)  //handler creates a Hero-like object from the name

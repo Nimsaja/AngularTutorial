@@ -16,7 +16,9 @@ const httpOptions = {
 })
 export class HeroService {
 
-  private heroesUrl = 'http://localhost:8081/api/heroes'; // URL to web api
+//  private heroesUrl = 'http://localhost:8081/api/heroes'; // URL to web api
+  
+  private heroesUrl = 'http://localhost:8080/api/heroes'; // URL to web api
 //  private heroesUrl = 'https://lima-205919.appspot.com/api/heroes'; // URL to google cloud
 //  private heroesUrl = 'https://goheros-207118.appspot.com/api/heroes)'; // URL to google cloud with database
 
