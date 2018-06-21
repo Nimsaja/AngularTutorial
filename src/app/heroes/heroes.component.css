@@ -76,7 +76,7 @@ button.moveup {
   position: relative;
   left: 210px;
   top: -34px;
-  background-color: gray;
+  background-color: #d3d3d3;
   color: white;
 }
 
@@ -84,6 +84,6 @@ button.movedown {
   position: relative;
   left: 215px;
   top: -34px;
-  background-color: gray;
+  background-color: #d3d3d3;
   color: white;
 }
