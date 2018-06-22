@@ -16,6 +16,8 @@ import { HeroService } from '../hero.service';
 })
 export class HeroSearchComponent implements OnInit {
   heroes$: Observable<Hero[]>;
+  arrowKeyLocation = 0;
+  selectedHero: Hero;
   private searchTerms = new Subject<string>();
 
   constructor(private heroService: HeroService) { }
@@ -23,6 +25,15 @@ export class HeroSearchComponent implements OnInit {
   // Push a search term into the observable stream
   search(term: string): void {
     this.searchTerms.next(term);
+  }
+  
+  keydown(event: KeyboardEvent) {
+    switch (event.keyCode) {
+      case 38: this.arrowKeyLocation--;
+               break;
+      case 40: this.arrowKeyLocation++;
+               break;
+    }
   }
 
   ngOnInit(): void {
@@ -36,6 +47,15 @@ export class HeroSearchComponent implements OnInit {
       // switch to new search observable each time the term changes
       switchMap((term: string) => this.heroService.searchHeroes(term)),
     );
+  }
+  
+  getHeroInList(): void {
+    console.log("index "+this.arrowKeyLocation)
+    this.heroes$.pipe(
+      
+    );
+    this.selectedHero = this.heroes$[this.arrowKeyLocation];
+    console.log("selected Hero: "+this.selectedHero.name);    
   }
 
 }
