@@ -1,13 +1,14 @@
 <div id="search-component">
 	<h4>Hero Search</h4>
 	
-	<input #searchBox id="search-box" (keyup)="search(searchBox.value)" />
+	<input #searchBox id="search-box" (keyup)="search(searchBox.value)" (keydown)="keydown($event)" (keyup.enter)="getHeroInList(arrowKeyLocation)"/>
 	
 	<ul class="search-result">
-		<li *ngFor="let hero of heroes$ | async" >  <!--  The $ is a convention that indicates heroes$ is an Observable, not an array -->
-			<a routerLink="/detail/{{hero.id}}">    <!-- The AsyncPipe subscribes to an Observable automatically -->
-				{{hero.name}}
-			</a>
+		<li *ngFor="let hero of heroes$ | async; let i = index" (mouseover)="arrowKeyLocation = i"
+		  	[ngStyle]="{'background-color': i == arrowKeyLocation ? '#607D8B' : 'white'}">  <!--  The $ is a convention that indicates heroes$ is an Observable, not an array -->
+			
+			<a [ngStyle]="{'color': i == arrowKeyLocation ? 'white' : '#888'}"
+			 routerLink="/detail/{{hero.id}}">{{hero.name}}</a>    <!-- The AsyncPipe subscribes to an Observable automatically -->
 		</li>	
 	</ul>
 </div>

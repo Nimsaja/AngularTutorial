@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { Observable, Subject } from 'rxjs';
 
@@ -16,13 +17,27 @@ import { HeroService } from '../hero.service';
 })
 export class HeroSearchComponent implements OnInit {
   heroes$: Observable<Hero[]>;
+  foundHeroes$: Observable<Hero[]>;
+  arrowKeyLocation = 0;
+  selectedHero: Hero;
+  heroes: Hero[];
+  private arrayIndex = 0;
   private searchTerms = new Subject<string>();
 
-  constructor(private heroService: HeroService) { }
+  constructor(private heroService: HeroService, private router: Router) { }
   
   // Push a search term into the observable stream
   search(term: string): void {
     this.searchTerms.next(term);
+  }
+  
+  keydown(event: KeyboardEvent) {
+    switch (event.keyCode) {
+      case 38: this.arrowKeyLocation--;
+               break;
+      case 40: this.arrowKeyLocation++;
+               break;
+    }
   }
 
   ngOnInit(): void {
@@ -34,8 +49,18 @@ export class HeroSearchComponent implements OnInit {
       distinctUntilChanged(),
       
       // switch to new search observable each time the term changes
-      switchMap((term: string) => this.heroService.searchHeroes(term)),
+      switchMap((term: string) => this.foundHeroes$ = this.heroService.searchHeroes(term)),
     );
+  }
+  
+  getHeroInList(pos: number): void {
+    console.log("getHeroInList "+pos);
+    
+    
+    this.foundHeroes$.subscribe(heroes=>{
+        this.router.navigateByUrl("/detail/"+heroes.slice(pos,pos+1)[0].id);
+        });
+    
   }
 
 }
