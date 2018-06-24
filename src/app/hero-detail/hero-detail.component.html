@@ -6,7 +6,7 @@
 	</div>
 	<div> <!-- binding input to name -->
 		<label>name: <input [(ngModel)]="hero.name" 
-			placeholder="name">
+			placeholder="name" (keyup.esc)="goBack()" (keyup.enter)="save()"  ngModel appAutofocus required>
 		</label>
 	</div>
 </div>
