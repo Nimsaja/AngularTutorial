@@ -23,8 +23,6 @@ export class HeroesComponent implements OnInit {
   }
   
   add(name: string): void {
-    console.log("add Hero")
-    
     name = name.trim();
     if (!name) { return; }
     this.heroService.addHero({ name } as Hero)  //handler creates a Hero-like object from the name
@@ -38,6 +36,24 @@ export class HeroesComponent implements OnInit {
     this.heroService.deleteHero(hero)
       .subscribe(_ => this.getHeroes());
     
+  }
+  
+  moveUp(hero: Hero): void {
+    let pos: number = this.heroes.indexOf(hero);
+    
+    if (pos > 0) {
+      this.heroes.splice(pos-1, 0, this.heroes.splice(pos, 1)[0]);
+      this.heroService.switchHero(hero, this.heroes.indexOf(hero)).subscribe();
+    }
+  }
+  
+  moveDown(hero: Hero): void {
+    let pos: number = this.heroes.indexOf(hero);
+    
+    if (pos < this.heroes.length) {
+      this.heroes.splice(pos+1, 0, this.heroes.splice(pos, 1)[0]);
+      this.heroService.switchHero(hero, this.heroes.indexOf(hero)).subscribe();
+    }
   }
 
 }

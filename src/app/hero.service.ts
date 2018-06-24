@@ -85,6 +85,14 @@ export class HeroService {
       catchError(this.handleError<Hero[]>('searchHeroes ' + `${this.heroesUrl}/?name=${term}`, []))
     );
   }
+  
+  /** PUT: update the hero position on the server */
+  switchHero(hero: Hero, pos: number): Observable<any> {
+    return this.http.put(`${this.heroesUrl}?pos=${pos}`, hero, httpOptions).pipe(
+      tap(_ => this.log(`updated hero name=${hero.name} to position ${pos}`)),
+      catchError(this.handleError<any>('switchHero'))
+    );
+  }
 
   //** Log a HeroService message with the MessageService */
   private log(message: string) {
