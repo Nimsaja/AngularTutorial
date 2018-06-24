@@ -3,12 +3,13 @@
 	
 	<input #searchBox id="search-box" (keyup)="search(searchBox.value)" (keydown)="keydown($event)" (keyup.enter)="getHeroInList(arrowKeyLocation)"/>
 	
+	<!--  The $ is a convention that indicates heroes$ is an Observable, not an array, The AsyncPipe subscribes to an Observable automatically -->
 	<ul class="search-result">
 		<li *ngFor="let hero of heroes$ | async; let i = index" (mouseover)="arrowKeyLocation = i"
-		  	[ngStyle]="{'background-color': i == arrowKeyLocation ? '#607D8B' : 'white'}">  <!--  The $ is a convention that indicates heroes$ is an Observable, not an array -->
-			
+		  	[ngStyle]="{'background-color': i == arrowKeyLocation ? '#607D8B' : 'white'}">  
+						
 			<a [ngStyle]="{'color': i == arrowKeyLocation ? 'white' : '#888'}"
-			 (click)="getHeroInList(arrowKeyLocation)">{{hero.name}}</a>    <!-- The AsyncPipe subscribes to an Observable automatically -->
+			 (click)="getHeroInList(arrowKeyLocation)">{{hero.name}}</a>    
 		</li>	
 	</ul>
 </div>
