@@ -1,3 +1,4 @@
+import { environment } from '../environments/environment';
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 
@@ -16,15 +17,17 @@ const httpOptions = {
 })
 export class HeroService {
 
-//  private heroesUrl = 'http://localhost:8081/api/heroes'; // URL to web api
+//  private heroesUrl = 'http://localhost:8080/api/heroes'; // URL to web api
+//  private heroesUrl = 'https://goheros-207118.appspot.com/api/heroes'; // URL to google cloud with database
   
-  private heroesUrl = 'http://localhost:8080/api/heroes'; // URL to web api
-//  private heroesUrl = 'https://lima-205919.appspot.com/api/heroes'; // URL to google cloud
-//  private heroesUrl = 'https://goheros-207118.appspot.com/api/heroes)'; // URL to google cloud with database
+  private heroesUrl = environment.apiUrl;
 
   constructor(
     private http: HttpClient,
-    private messageService: MessageService) {}
+    private messageService: MessageService) {
+            
+    console.log("URL "+this.heroesUrl);        
+  }
 
   /** GET heroes from the server */
   getHeroes(): Observable<Hero[]> {
