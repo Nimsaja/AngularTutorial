@@ -8,7 +8,7 @@
 		  	[ngStyle]="{'background-color': i == arrowKeyLocation ? '#607D8B' : 'white'}">  <!--  The $ is a convention that indicates heroes$ is an Observable, not an array -->
 			
 			<a [ngStyle]="{'color': i == arrowKeyLocation ? 'white' : '#888'}"
-			 routerLink="/detail/{{hero.id}}">{{hero.name}}</a>    <!-- The AsyncPipe subscribes to an Observable automatically -->
+			 (click)="getHeroInList(arrowKeyLocation)">{{hero.name}}</a>    <!-- The AsyncPipe subscribes to an Observable automatically -->
 		</li>	
 	</ul>
 </div>
