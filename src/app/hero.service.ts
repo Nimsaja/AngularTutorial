@@ -22,8 +22,8 @@ export class HeroService {
   constructor(
     private http: HttpClient,
     private messageService: MessageService) {
-            
-    console.log("URL "+this.heroesUrl);        
+
+    console.log('URL ' + this.heroesUrl);
   }
 
   /** GET heroes from the server */
@@ -57,7 +57,7 @@ export class HeroService {
   /** POST: add a new hero to the server */
   addHero(hero: Hero): Observable<Hero> {
     return this.http.post<Hero>(this.heroesUrl, hero, httpOptions).pipe(
-      tap((hero: Hero) => this.log(`added hero w/ id=${hero.id}`)),
+      tap((h: Hero) => this.log(`added hero w/ id=${h.id}`)),
       catchError(this.handleError<Hero>('addHero'))
     );
   }
@@ -85,7 +85,7 @@ export class HeroService {
       catchError(this.handleError<Hero[]>('searchHeroes ' + `${this.heroesUrl}/?name=${term}`, []))
     );
   }
-  
+
   /** PUT: update the hero position on the server */
   switchHero(hero: Hero, pos: number): Observable<any> {
     return this.http.put(`${this.heroesUrl}?pos=${pos}`, hero, httpOptions).pipe(
@@ -94,7 +94,7 @@ export class HeroService {
     );
   }
 
-  //** Log a HeroService message with the MessageService */
+  // **Log a HeroService message with the MessageService */
   private log(message: string) {
     this.messageService.add('HeroService: ' + message);
   }
@@ -113,8 +113,8 @@ export class HeroService {
 
       // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);
-      this.log("Server Error Message: "+error.error);
-      
+      this.log('Server Error Message: ' + error.error);
+
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
