@@ -25,21 +25,6 @@ export class HeroesComponent implements OnInit {
       .subscribe(heroes => this.heroes = heroes);
   }
 
-  fetchScore(): void {
-    if (this.showScore === false) {
-      this.scoreMap = this.heroService.getScores();
-    }
-    this.showScore = !this.showScore;
-  }
-
-  getScore(hero: Hero): string {
-    if (this.scoreMap.has(hero.id)) {
-      return this.scoreMap.get(hero.id).toString();
-    } else {
-      return 'NaN';
-    }
-  }
-
   add(name: string): void {
     name = name.trim();
     if (!name) { return; }
@@ -74,4 +59,24 @@ export class HeroesComponent implements OnInit {
     }
   }
 
+  fetchScore(): void {
+    if (this.showScore === false) {
+      this.heroService.getScores().subscribe(
+        (t: Map<number, number>) => {
+          this.scoreMap = t;
+          this.showScore = true;
+        }
+      );
+    } else {
+      this.showScore = false;
+    }
+  }
+
+  getScore(hero: Hero): string {
+    if (this.scoreMap[hero.id])  {
+      return this.scoreMap[hero.id].toString();
+    } else {
+      return 'NaN';
+    }
+  }
 }

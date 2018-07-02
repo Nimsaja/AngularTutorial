@@ -96,17 +96,12 @@ export class HeroService {
   }
 
   /** GET: get score from 8a.nu */
-  getScores(): Map<number, number> {
+  getScores(): Observable<Map<number, number>> {
     console.log('Try to get Scores');
-    this.http.get(`${this.heroesUrl}/scores`).pipe(
-      tap(scoreMap => this.log(`fetched scores for heroes`)),
-      catchError(this.handleError('getHeroes', []))
-      ).subscribe();
-
-    this.scoreMapTest = new Map<number, number>();
-    this.scoreMapTest.set(1, 100);
-
-    return this.scoreMapTest;
+    return this.http.get<Map<number, number>>(`${this.heroesUrl}/scores`).pipe(
+      tap(_ => this.log(`fetched scores for heroes`)),
+      catchError(this.handleError('getScores', new Map<number, number>()))
+    );
   }
 
   // **Log a HeroService message with the MessageService */
