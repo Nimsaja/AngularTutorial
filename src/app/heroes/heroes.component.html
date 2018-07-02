@@ -10,16 +10,20 @@
 	</button>
 </div>
 <ul class="heroes">
-	<li *ngFor="let hero of heroes" (mouseover)="hoverid=hero.id" (mouseleave)="hover='-1'">
-	<a routerLink="/detail/{{hero.id}}"> <span class="badge">{{hero.id}}</span>{{hero.name}}</a>
+	<li *ngFor="let hero of heroes" (mouseover)="hoverid=hero.id" (mouseleave)="hoverid='-1'">
+  <a routerLink="/detail/{{hero.id}}"> <span class="badge">{{hero.id}}</span>
+    {{hero.name}}
+    <span class="score">{{getScore(hero)}}</span>
+  </a>
+
 		<button class="delete" title="delete hero" (click)="delete(hero)">x</button>
-		
+
 		<button [hidden]="hero.id != hoverid"
 			class="moveup" title="move hero one up" (click)="moveUp(hero)">&#652;</button>
-			
+
 		<button [hidden]="hero.id != hoverid"
 			class="movedown" title="move hero one down" (click)="moveDown(hero)">v</button>
 	</li>
-	
+
 </ul>
 

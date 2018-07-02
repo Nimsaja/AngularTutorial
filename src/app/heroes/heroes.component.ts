@@ -10,6 +10,8 @@ import { HeroService } from '../hero.service';
 export class HeroesComponent implements OnInit {
 
   heroes: Hero[];
+  scoreMap: Map<number, number>;
+  hoverid: number;
 
   constructor(private heroService: HeroService) { }
 
@@ -20,6 +22,16 @@ export class HeroesComponent implements OnInit {
   getHeroes(): void {
     this.heroService.getHeroes()
       .subscribe(heroes => this.heroes = heroes);
+
+      this.scoreMap = this.heroService.getScores();
+  }
+
+  getScore(hero: Hero): string {
+    if (this.scoreMap.has(hero.id)) {
+      return this.scoreMap.get(hero.id).toString();
+    } else {
+      return 'NaN';
+    }
   }
 
   add(name: string): void {

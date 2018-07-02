@@ -99,6 +99,22 @@ export class HeroService {
     this.messageService.add('HeroService: ' + message);
   }
 
+  /** GET: get score from 8a.nu */
+  getScores(): Map<number, number> {
+    // TODO need to get scores from backend
+    const scoreMap = new Map();
+
+    let score = 0;
+    for (let i = 1; i < 10; i++) {
+      score = i * i * 100;
+      scoreMap.set(i, score);
+    }
+
+    console.log(scoreMap);
+
+    return scoreMap;
+  }
+
   /**
  * Handle Http operation that failed.
  * Let the app continue.
