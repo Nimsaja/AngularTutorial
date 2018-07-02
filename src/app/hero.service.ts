@@ -18,6 +18,7 @@ const httpOptions = {
 export class HeroService {
 
   private heroesUrl = environment.apiUrl;
+  scoreMapTest: Map<number, number>;
 
   constructor(
     private http: HttpClient,
@@ -94,25 +95,23 @@ export class HeroService {
     );
   }
 
+  /** GET: get score from 8a.nu */
+  getScores(): Map<number, number> {
+    console.log('Try to get Scores');
+    this.http.get(`${this.heroesUrl}/scores`).pipe(
+      tap(scoreMap => this.log(`fetched scores for heroes`)),
+      catchError(this.handleError('getHeroes', []))
+      ).subscribe();
+
+    this.scoreMapTest = new Map<number, number>();
+    this.scoreMapTest.set(1, 100);
+
+    return this.scoreMapTest;
+  }
+
   // **Log a HeroService message with the MessageService */
   private log(message: string) {
     this.messageService.add('HeroService: ' + message);
-  }
-
-  /** GET: get score from 8a.nu */
-  getScores(): Map<number, number> {
-    // TODO need to get scores from backend
-    const scoreMap = new Map();
-
-    let score = 0;
-    for (let i = 1; i < 10; i++) {
-      score = i * i * 100;
-      scoreMap.set(i, score);
-    }
-
-    console.log(scoreMap);
-
-    return scoreMap;
   }
 
   /**
