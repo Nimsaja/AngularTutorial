@@ -12,6 +12,7 @@ export class HeroesComponent implements OnInit {
   heroes: Hero[];
   scoreMap: Map<number, number>;
   hoverid: number;
+  showScore = false;
 
   constructor(private heroService: HeroService) { }
 
@@ -22,8 +23,13 @@ export class HeroesComponent implements OnInit {
   getHeroes(): void {
     this.heroService.getHeroes()
       .subscribe(heroes => this.heroes = heroes);
+  }
 
+  fetchScore(): void {
+    if (this.showScore === false) {
       this.scoreMap = this.heroService.getScores();
+    }
+    this.showScore = !this.showScore;
   }
 
   getScore(hero: Hero): string {
