@@ -14,6 +14,7 @@ import { AppRoutingModule } from './/app-routing.module';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HeroSearchComponent } from './hero-search/hero-search.component';
 import { AutofocusDirective } from './autofocus.directive';
+import { ProtocolComponent } from './protocol/protocol.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { AutofocusDirective } from './autofocus.directive';
     MessagesComponent,
     DashboardComponent,
     HeroSearchComponent,
-    AutofocusDirective
+    AutofocusDirective,
+    ProtocolComponent
   ],
   imports: [
     BrowserModule,

@@ -7,6 +7,7 @@ import {catchError, map, tap} from 'rxjs/operators';
 
 import {Hero} from './hero';
 import {MessageService} from './message.service';
+import { Protocol } from './protocol';
 
 const httpOptions = {
   headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -97,10 +98,18 @@ export class HeroService {
 
   /** GET: get score from 8a.nu */
   getScores(): Observable<Map<number, number>> {
-    console.log('Try to get Scores');
     return this.http.get<Map<number, number>>(`${this.heroesUrl}/scores`).pipe(
       tap(_ => this.log(`fetched scores for heroes`)),
       catchError(this.handleError('getScores', new Map<number, number>()))
+    );
+  }
+
+  /** GET: get the protocol */
+  getProtocol(): Observable<Protocol> {
+    console.log("Try to get the Protocol");
+    return this.http.get<Protocol>('http://localhost:8080/api/protocolMem').pipe(
+      tap(p => this.log('get Protocol for action '+p.action)),
+      catchError(this.handleError<Protocol>('getProtocol'))
     );
   }
 
