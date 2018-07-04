@@ -10,6 +10,9 @@ import { HeroService } from '../hero.service';
 export class HeroesComponent implements OnInit {
 
   heroes: Hero[];
+  scoreMap: Map<number, number>;
+  hoverid: number;
+  showScore = false;
 
   constructor(private heroService: HeroService) { }
 
@@ -56,4 +59,24 @@ export class HeroesComponent implements OnInit {
     }
   }
 
+  fetchScore(): void {
+    if (this.showScore === false) {
+      this.heroService.getScores().subscribe(
+        (t: Map<number, number>) => {
+          this.scoreMap = t;
+          this.showScore = true;
+        }
+      );
+    } else {
+      this.showScore = false;
+    }
+  }
+
+  getScore(hero: Hero): string {
+    if (this.scoreMap[hero.id])  {
+      return this.scoreMap[hero.id].toString();
+    } else {
+      return 'NaN';
+    }
+  }
 }

@@ -18,6 +18,7 @@ const httpOptions = {
 export class HeroService {
 
   private heroesUrl = environment.apiUrl;
+  scoreMapTest: Map<number, number>;
 
   constructor(
     private http: HttpClient,
@@ -91,6 +92,15 @@ export class HeroService {
     return this.http.put(`${this.heroesUrl}?pos=${pos}`, hero, httpOptions).pipe(
       tap(_ => this.log(`updated hero name=${hero.name} to position ${pos}`)),
       catchError(this.handleError<any>('switchHero'))
+    );
+  }
+
+  /** GET: get score from 8a.nu */
+  getScores(): Observable<Map<number, number>> {
+    console.log('Try to get Scores');
+    return this.http.get<Map<number, number>>(`${this.heroesUrl}/scores`).pipe(
+      tap(_ => this.log(`fetched scores for heroes`)),
+      catchError(this.handleError('getScores', new Map<number, number>()))
     );
   }
 
