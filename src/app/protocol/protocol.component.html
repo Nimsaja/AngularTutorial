@@ -1,8 +1,11 @@
 <h2>Protocol</h2>
 
-<ul class="Protocols:">
-	<li *ngFor="let protocol of protocols">
-  <a>{{protocol.time | date : 'dd-MM-yyyy HH:mm:ss'}}: {{protocol.action}} on {{protocol.heroid}} | {{protocol.note}}</a>
-	</li>
-
-</ul>
+<table>
+  <th>Time</th><th>Action</th><th>Hero ID</th><th>Note</th>
+  <tr *ngFor="let p of protocols">
+    <td title="'Time'"> {{ p.time | date : 'dd-MM-yyyy HH:mm:ss'}}</td>
+    <td title="'Action'">{{p.action}}</td>
+    <td title="'Hero ID'">{{p.heroid}}</td>
+    <td title="'Note'">{{p.note}}</td>
+  </tr>
+</table>
