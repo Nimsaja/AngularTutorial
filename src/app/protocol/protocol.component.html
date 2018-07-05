@@ -1,3 +1,8 @@
 <h2>Protocol</h2>
 
-<h5>{{getProtocolString()}}</h5>
+<ul class="Protocols:">
+	<li *ngFor="let protocol of protocols">
+  <a>{{protocol.time | date : 'dd-MM-yyyy HH:mm:ss'}}: {{protocol.action}} on {{protocol.heroid}} | {{protocol.note}}</a>
+	</li>
+
+</ul>

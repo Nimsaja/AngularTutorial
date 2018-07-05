@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { HeroService } from '../hero.service';
-import { Protocol } from '../Protocol';
-import { Time } from "@angular/common";
+import { Protocol } from '../protocol';
 
 @Component({
   selector: 'app-protocol',
@@ -10,24 +9,16 @@ import { Time } from "@angular/common";
 })
 export class ProtocolComponent implements OnInit {
 
-  protocol: Protocol;
-  protocolString: string
+  protocols: Protocol[];
 
   constructor(private heroService: HeroService) { }
 
   ngOnInit() {
-    this.getProtocol();  
+    this.getProtocol();
   }
 
   getProtocol(): void {
     this.heroService.getProtocol().subscribe(
-      p => {this.protocol = p;
-        this.protocolString = p.time+"-> Action: "+p.action+", Hero ID: "+p.heroid+", Note: "+p.note}
-    );
+      p => this.protocols = p);
   }
-
-  getProtocolString(): string {
-    return this.protocolString;
-  }
-
 }

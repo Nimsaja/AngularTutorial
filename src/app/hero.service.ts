@@ -105,11 +105,11 @@ export class HeroService {
   }
 
   /** GET: get the protocol */
-  getProtocol(): Observable<Protocol> {
-    console.log("Try to get the Protocol");
-    return this.http.get<Protocol>('http://localhost:8080/api/protocolMem').pipe(
-      tap(p => this.log('get Protocol for action '+p.action)),
-      catchError(this.handleError<Protocol>('getProtocol'))
+  getProtocol(): Observable<Protocol[]> {
+    console.log('Try to get the Protocol');
+    return this.http.get<Protocol[]>(`${this.heroesUrl}/protocolMem`).pipe(
+      tap(_ => this.log('get Protocols')),
+      catchError(this.handleError('getProtocol', []))
     );
   }
 
