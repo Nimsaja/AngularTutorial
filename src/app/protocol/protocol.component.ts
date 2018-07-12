@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
 import { HeroService } from '../hero.service';
 import { Protocol } from '../protocol';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 @Component({
   selector: 'app-protocol',
@@ -10,9 +10,11 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class ProtocolComponent implements OnInit {
 
-  protocols: Protocol[];
+  @ViewChild(MatPaginator) paginator: MatPaginator;
+
   displayedColumns = ['time', 'action', 'heroid', 'note'];
   dataSource = new MatTableDataSource();
+  count: number;
 
   constructor(private heroService: HeroService) { }
 
@@ -22,8 +24,9 @@ export class ProtocolComponent implements OnInit {
 
   getProtocol(): void {
     this.heroService.getProtocol().subscribe(
-      p => {this.protocols = p;
-            this.dataSource.data = p;
-          });
+      p => {this.dataSource.data = p;
+            this.count = this.dataSource.data.length;
+            this.dataSource.paginator = this.paginator;
+      });
   }
 }

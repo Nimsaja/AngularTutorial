@@ -1,6 +1,6 @@
 <h2>Protocol</h2>
 
-<mat-table #table [dataSource]="protocols">
+<mat-table #table [dataSource]="dataSource">
 
     <ng-container matColumnDef="time">
       <mat-header-cell *matHeaderCellDef> Time </mat-header-cell>
@@ -25,4 +25,7 @@
     <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
     <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
   </mat-table>
+
+  <mat-paginator [length]="count" [pageSize]="5" [pageSizeOptions]="[5, 10, 25]">
+  </mat-paginator>
 
