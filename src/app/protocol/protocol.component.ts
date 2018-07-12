@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HeroService } from '../hero.service';
 import { Protocol } from '../protocol';
+import { MatTableDataSource } from '@angular/material';
 
 @Component({
   selector: 'app-protocol',
@@ -10,6 +11,8 @@ import { Protocol } from '../protocol';
 export class ProtocolComponent implements OnInit {
 
   protocols: Protocol[];
+  displayedColumns = ['time', 'action', 'heroid', 'note'];
+  dataSource = new MatTableDataSource();
 
   constructor(private heroService: HeroService) { }
 
@@ -19,6 +22,8 @@ export class ProtocolComponent implements OnInit {
 
   getProtocol(): void {
     this.heroService.getProtocol().subscribe(
-      p => this.protocols = p);
+      p => {this.protocols = p;
+            this.dataSource.data = p;
+          });
   }
 }
