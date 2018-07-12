@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms'; // <-- NgModel lives here
 import { HttpClientModule } from '@angular/common/http';
-import { MatInputModule, MatTableModule, MatToolbarModule, MatPaginatorModule } from '@angular/material';
+import { MatInputModule, MatTableModule, MatToolbarModule, MatPaginatorModule, MatSortModule } from '@angular/material';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 
 import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
@@ -35,6 +35,7 @@ import { ProtocolComponent } from './protocol/protocol.component';
     AppRoutingModule,
     HttpClientModule,
     MatToolbarModule, MatInputModule, MatTableModule, MatPaginatorModule,
+    MatSortModule,
     BrowserAnimationsModule,
 
     // The HttpClientInMemoryWebApiModule module intercepts HTTP requests

@@ -1,24 +1,24 @@
 <h2>Protocol</h2>
 
-<mat-table #table [dataSource]="dataSource">
+<mat-table #table matSort [dataSource]="dataSource">
 
     <ng-container matColumnDef="time">
-      <mat-header-cell *matHeaderCellDef> Time </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Time </mat-header-cell>
       <mat-cell *matCellDef="let p">{{ p.time | date : 'dd-MM-yyyy HH:mm:ss'}}  </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="action">
-      <mat-header-cell *matHeaderCellDef> Action </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Action </mat-header-cell>
       <mat-cell *matCellDef="let p">{{p.action}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="heroid">
-      <mat-header-cell *matHeaderCellDef> Hero ID </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Hero ID </mat-header-cell>
       <mat-cell *matCellDef="let p"> {{p.heroid}} </mat-cell>
     </ng-container>
 
     <ng-container matColumnDef="note">
-      <mat-header-cell *matHeaderCellDef> Note </mat-header-cell>
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Note </mat-header-cell>
       <mat-cell *matCellDef="let p">{{p.note}} </mat-cell>
     </ng-container>
 
