@@ -1,5 +1,9 @@
 <h2>Protocol</h2>
 
+<mat-form-field>
+  <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+</mat-form-field>
+
 <mat-table #table matSort [dataSource]="dataSource">
 
     <ng-container matColumnDef="time">
