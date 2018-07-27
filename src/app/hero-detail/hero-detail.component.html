@@ -1,15 +1,25 @@
-<div *ngIf="hero"> <!-- hide detail view when hero is undefined -->
+<div *ngIf="hero">
+  <!-- hide detail view when hero is undefined -->
 
-	<h2>{{hero.name | uppercase }} Details</h2>
-	<div>
-		<span>id: </span>{{hero.id}}
-	</div>
-	<div> <!-- binding input to name -->
-		<label>name: <input [(ngModel)]="hero.name" 
-			placeholder="name" (keyup.esc)="goBack()" (keyup.enter)="save()"  ngModel appAutofocus required>
-		</label>
-	</div>
+  <h2>{{hero.name | uppercase }} Details</h2>
+  <div>
+    <span>id: </span>{{hero.id}}
+  </div>
+  <div>
+    <!-- binding input to name -->
+    <label>name:
+      <input [(ngModel)]="hero.name" placeholder="name" (keyup.esc)="goBack()" (keyup.enter)="save()" ngModel appAutofocus
+        required>
+    </label>
+  </div>
 </div>
 
 <button (click)="goBack()">go back</button>
 <button (click)="save()">save</button>
+
+<div *ngIf="hero && hero.name=='Mario'">
+  <figure class="figure">
+    <img src="https://avatars2.githubusercontent.com/u/33186330?s=400&v=4">
+    <figcaption class="figure-caption">No, that's not Mario! But his best friend! ;-)</figcaption>
+  </figure>
+</div>
